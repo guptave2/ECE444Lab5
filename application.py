@@ -24,7 +24,7 @@ def home():
     return """
         <h2>Fake News Detection</h2>
         <form action="/predict" method="post">
-            <label for="text">Enter text to classify:</label><br><br>
+            <label for="text">Enter text:</label><br><br>
             <textarea name="text" id="text" rows="4" cols="50"></textarea><br><br>
             <input type="submit" value="Predict">
         </form>
@@ -40,11 +40,8 @@ def predict():
     # Use the model to make a prediction
     prediction = loaded_model.predict(vectorizer.transform([input_text]))[0]
 
-    # Convert numeric prediction to 'FAKE' or 'REAL'
-    output = "REAL" if prediction == 1 else "FAKE"
-
     # Return the result
-    return f'<h3>Prediction: {output}</h3><br><a href="/">Go Back</a>'
+    return f'<h3>Prediction: {prediction}</h3><br><a href="/">Go Back</a>'
 
 
 if __name__ == "__main__":
